@@ -63,35 +63,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-success text-center pt-2">PHP-HOTEL</h1>
+    <div class="container py-5">
+        <h1 class="text-success text-center mb-5">PHP-HOTEL</h1>
 
-        <h2>Filters:</h2>
+        <div class="card mb-4 p-4">
+            <h2 class="h4 mb-3">Filters</h2>
 
-        <form action="./index.php">
-            <input type="checkbox" name="parking" id="parking">
-            <label for="parking">parking</label>
+            <form action="./index.php" class="row align-items-end g-3">
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input type="checkbox" name="parking" id="parking" class="form-check-input">
+                        <label for="parking" class="form-check-label">Parking Available</label>
+                    </div>
+                </div>
 
-            <input type="number" name="vote" id="vote" min="0" max="10" value="0">
-            <label for="vote">vote</label>
+                <div class="col-md-4">
+                    <label for="vote" class="form-label">Minimum Rating</label>
+                    <input type="number" name="vote" id="vote" min="0" max="10" value="0" class="form-control">
+                </div>
 
-            <button type="submit">search</button>
-        </form>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Search Hotels</button>
+                </div>
+            </form>
+        </div>
 
-        <table class="table table-striped">
-
-        
-            <thead>
-                <tr>
-                <th scope="col">N.</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Parking</th>
-                <th scope="col">Vote</th>
-                <th scope="col">Distance to center</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                    <th scope="col">N.</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Parking</th>
+                    <th scope="col">Vote</th>
+                    <th scope="col">Distance to center</th>
+                    </tr>
+                </thead>
+                <tbody>
 
             <?php
                 foreach($hotels as $hotel){
@@ -110,10 +119,16 @@
             ?>
                 <tr>
                 <th scope="row"><?php echo $counter ?></th>
-                <td><?php echo $hotel["name"] ?></td>
+                <td class="fw-bold"><?php echo $hotel["name"] ?></td>
                 <td><?php echo $hotel["description"] ?></td>
-                <td><?php echo $hotel["parking"] == true ? "yes" : "no" ?></td>
-                <td><?php echo $hotel["vote"] ?></td>
+                <td><?php echo $hotel["parking"] == true ? '<span class="badge bg-success">Yes</span>' : '<span class="badge bg-danger">No</span>' ?></td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="ms-2 ">
+                            <?php echo $hotel["vote"] ?>
+                        </div>
+                    </div>
+                </td>
                 <td><?php echo $hotel["distance_to_center"]."km" ?></td>
                 
                 </tr>
