@@ -45,6 +45,13 @@
     $parkingFilter = false;
     $voteFilter = 0;
 
+    if(isset($_GET["parking"]) && $_GET["parking"] == "on"){
+        $parkingFilter = true;
+    }
+    if(isset($_GET["vote"])){
+        $voteFilter = $_GET["vote"];
+    }
+
 ?>
 
 <!DOCTYPE html>
