@@ -42,6 +42,9 @@
 
     $counter = 1;
 
+    $parkingFilter = false;
+    $voteFilter = 0;
+
 ?>
 
 <!DOCTYPE html>
@@ -56,12 +59,16 @@
     <div class="container">
         <h1 class="text-success text-center pt-2">PHP-HOTEL</h1>
 
-        <form action="">
-            <input type="checkbox" name="" id="">
-            <label for=""></label>
+        <h2>Filters:</h2>
 
-            <input type="number" name="vote" id="vote" min="0" max="10">
-            <label for="vote"></label>
+        <form action="./index.php">
+            <input type="checkbox" name="parking" id="parking">
+            <label for="parking">parking</label>
+
+            <input type="number" name="vote" id="vote" min="0" max="10" value="0">
+            <label for="vote">vote</label>
+
+            <button type="submit">search</button>
         </form>
 
         <table class="table table-striped">
@@ -81,6 +88,18 @@
 
             <?php
                 foreach($hotels as $hotel){
+
+                    
+                    if($parkingFilter){
+                        if(!$hotel["parking"]){
+                            continue;
+                        }
+                    }
+                    if($voteFilter > $hotel["vote"]){
+                        continue;
+                    }
+
+                    
             ?>
                 <tr>
                 <th scope="row"><?php echo $counter ?></th>
@@ -94,6 +113,7 @@
                 
 
             <?php
+                    
                 $counter++;
                 }
             ?>
